@@ -1,0 +1,180 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Swagger documentation for the Simple Rest Server",
+    "version": "1.0.0",
+    "title": "Swagger Simple Rest Server",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "trillebar@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8085",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Simple RestServer",
+      "description": "A simple test for the API",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "test",
+      "description": "a simple test-service to test availablity"
+    },
+    {
+      "name": "sendsms",
+      "description": "Send an SMS using Twilio",
+      "externalDocs": {
+        "description": "Find out more about Twilio",
+        "url": "http://twilio.com"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/api/": {
+      "get": {
+        "tags": [
+          "test"
+        ],
+        "summary": "Get a heartbeat",
+        "description": "Will return an answer",
+        "operationId": "findPetsByStatus",
+        "produces": [
+          "text"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/sendsms": {
+      "post": {
+        "tags": [
+          "sendsms"
+        ],
+        "summary": "Sends an SMS using Twilio",
+        "description": "Will return an answer of type SmsResponse",
+        "operationId": "sendsms",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "JSON object used to send an SMS",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SMS"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/SmsResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SMS": {
+      "type": "object",
+      "required": [
+        "To",
+        "From",
+        "Body"
+      ],
+      "properties": {
+        "To": {
+          "type": "string",
+          "example": "+4792446460"
+        },
+        "From": {
+          "type": "string",
+          "example": "+4759446620"
+        },
+        "Body": {
+          "type": "string",
+          "example": "A test SMS Message"
+        }
+      }
+    },
+    "SmsResponse": {
+      "type": "object",
+      "required": [
+        "Status",
+        "To",
+        "From",
+        "Body"
+      ],
+      "properties": {
+        "Status": {
+          "type": "string",
+          "description": "{'OK','ERROR'}"
+        },
+        "To": {
+          "type": "string"
+        },
+        "From": {
+          "type": "string"
+        },
+        "Body": {
+          "type": "string"
+        },
+        "SmsId": {
+          "type": "string",
+          "description": "Is returned when Status=='OK'"
+        },
+        "Error": {
+          "type": "object",
+          "description": "Is returned when Status=='ERROR'",
+          "properties": {
+            "status": {
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            },
+            "code": {
+              "type": "integer"
+            },
+            "moreInfo": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
