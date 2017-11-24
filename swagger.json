@@ -1,29 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Swagger documentation for the Simple Rest Server",
+    "description": "Swagger documentation for REST API",
     "version": "1.0.0",
-    "title": "Swagger Simple Rest Server",
-    "termsOfService": "http://swagger.io/terms/",
-    "contact": {
-      "email": "trillebar@gmail.com"
-    },
-    "license": {
-      "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-    }
+    "title": "Simple Rest Server"
   },
   "host": "localhost:8085",
   "basePath": "/",
   "tags": [
-    {
-      "name": "Simple RestServer",
-      "description": "A simple test for the API",
-      "externalDocs": {
-        "description": "Find out more",
-        "url": "http://swagger.io"
-      }
-    },
     {
       "name": "test",
       "description": "a simple test-service to test availablity"
@@ -36,9 +20,6 @@
         "url": "http://twilio.com"
       }
     }
-  ],
-  "schemes": [
-    "http"
   ],
   "paths": {
     "/api/": {
@@ -137,19 +118,24 @@
       "properties": {
         "Status": {
           "type": "string",
-          "description": "{'OK','ERROR'}"
+          "example": "A test SMS Message",
+          "description": "Value is always one of {'OK','ERROR'}"
         },
         "To": {
-          "type": "string"
+          "type": "string",
+          "example": "+4792446460"
         },
         "From": {
-          "type": "string"
+          "type": "string",
+          "example": "+4759446620"
         },
         "Body": {
-          "type": "string"
+          "type": "string",
+          "example": "A test SMS Message"
         },
         "SmsId": {
           "type": "string",
+          "example": "SMfaac32daf72f497c89aec6a61ef21193",
           "description": "Is returned when Status=='OK'"
         },
         "Error": {
@@ -172,9 +158,5 @@
         }
       }
     }
-  },
-  "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
   }
 }
